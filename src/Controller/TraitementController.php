@@ -33,7 +33,7 @@ class TraitementController extends AbstractController
     }
 
     #[Route('/ajoutTraitements', name: 'ajoutTraitement')]
-    public function addTraitement(Request $request, ManagerRegistry $doctrine) : Response
+    public function ajoutTraitement(Request $request, ManagerRegistry $doctrine) : Response
     {
         $em = $doctrine->getManager();
         //Creation formulaire Traitement
@@ -52,8 +52,8 @@ class TraitementController extends AbstractController
         ));
     }
 
-    #[Route('/modif/{id}', name: 'modif_traitement')]
-    public function modif_traitement(Request $request, ManagerRegistry $doctrine, $id): Response
+    #[Route('/modifTraitement/{id}', name: 'modifTraitement')]
+    public function modifTraitement(Request $request, ManagerRegistry $doctrine, $id): Response
     {
         $em = $doctrine->getManager();
         $traitement = $doctrine->getRepository(Traitement::class)->find($id);
@@ -70,8 +70,8 @@ class TraitementController extends AbstractController
     ));
   }
 
-  #[Route('supp/{id}', name: 'supp_traitement')]
-  public function del(ManagerRegistry $doctrine, $id): Response
+  #[Route('supprimerTraitement/{id}', name: 'supprimerTraitement')]
+  public function supprimerTraitement(ManagerRegistry $doctrine, $id): Response
   {
     $repository = $doctrine->getRepository(Traitement::class);
     $em = $doctrine->getManager();
