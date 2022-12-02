@@ -10,10 +10,11 @@
 			<tr>
 				<th scope="col">Nom du médicament</th>
 				<th scope="col">Méthode d'application</th>
-				<th scope="col">Modifier/Supprimer</th>
+				<th scope="col">Modifier / Supprimer</th>
 				{% if unMedicament is defined %}
 					<th scope="col">Patients</th>
 				{% endif %}
+				<th scope="col">Effet Secondaire</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -22,7 +23,12 @@
 					<tr>
 						<td><a href="/medicament/{{medicament.id}}">{{medicament.libelle}}</a></td>
 						<td>{{medicament.methodeApplication.libelle}}</td>
-						<td><a href="/modifMedicament/{{medicament.id}}">Modifier</a> <a href="/supprimerMedicament/{{medicament.id}}">Supprimer</a></td>
+						<td><a href="/modifMedicament/{{medicament.id}}">Modifier</a> / <a href="/supprimerMedicament/{{medicament.id}}">Supprimer</a></td>
+						<td>
+						{% for effet in medicament.getEffetsSecondaires %}
+							{{effet.libelle}}
+						{% endfor %}
+						</td>
 					</tr>
 				{% endfor %}
 			{% endif %}

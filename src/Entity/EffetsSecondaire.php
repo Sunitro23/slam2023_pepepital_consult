@@ -20,7 +20,7 @@ class EffetsSecondaire
 
     #[ORM\ManyToMany(targetEntity: Medicament::class, inversedBy: 'effetsSecondaires')]
     private Collection $medicaments;
-
+    
     public function __construct()
     {
         $this->medicaments = new ArrayCollection();

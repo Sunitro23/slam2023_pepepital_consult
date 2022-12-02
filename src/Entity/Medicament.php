@@ -25,6 +25,9 @@ class Medicament
     #[ORM\OneToMany(mappedBy: 'medicaments', targetEntity: Indication::class)]
     private Collection $indications;
 
+    #[ORM\ManyToMany(targetEntity: EffetsSecondaire::class, inversedBy: 'medicaments')]
+    private Collection $effetsSecondaires;
+
     public function __construct()
     {
         $this->indications = new ArrayCollection();
@@ -38,6 +41,30 @@ class Medicament
     public function getLibelle(): ?string
     {
         return $this->libelle;
+    }
+
+    /**
+     * @return Collection<int, EffetSecondaire>
+     */
+    public function getEffetsSecondaires(): Collection
+    {
+        return $this->effetsSecondaires;
+    }
+
+    public function addEffetsSecondaire(EffetsSecondaire $effetsSecondaire): self
+    {
+        if (!$this->effetsSecondaires->contains($effetsSecondaire)) {
+            $this->effetsSecondaires->add($effetsSecondaire);
+        }
+
+        return $this;
+    }
+
+    public function removeEffetsSecondaire(EffetsSecondaire $effetsSecondaire): self
+    {
+        $this->effetsSecondaires->removeElement($effetsSecondaire);
+
+        return $this;
     }
 
     public function setLibelle(string $libelle): self
