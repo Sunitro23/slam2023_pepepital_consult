@@ -33,7 +33,7 @@ class MedicamentController extends AbstractController
         ]);
     }
 
-    #[Route('/ajoutMedicament', name: 'ajoutMedicament')]
+    #[Route('/medecin/ajoutMedicament', name: 'ajoutMedicament')]
     public function ajoutMedicament(Request $request, EntityManagerInterface $entityManager): Response
     {
         $medicament = new Medicament();
@@ -53,7 +53,7 @@ class MedicamentController extends AbstractController
         ]);
     }
 
-    #[Route('/modifMedicament/{id}', name:'modifMedicament')]
+    #[Route('/medecin/modifMedicament/{id}', name:'modifMedicament')]
     public function modifMedicament(Request $request, ManagerRegistry $doctrine, $id): Response
     {
         $em=$doctrine->getManager();
@@ -70,7 +70,7 @@ class MedicamentController extends AbstractController
         ));
     }
 
-    #[Route('/supprimerMedicament/{id}', name: 'supprimerMedicament')]
+    #[Route('/medecin/supprimerMedicament/{id}', name: 'supprimerMedicament')]
     public function supprimerMedicament(Request $request, ManagerRegistry $doctrine, $id): Response
     {
         $em=$doctrine->getManager();

@@ -32,7 +32,7 @@ class TraitementController extends AbstractController
         ]);
     }
 
-    #[Route('/ajoutTraitements', name: 'ajoutTraitement')]
+    #[Route('/medecin/ajoutTraitements', name: 'ajoutTraitement')]
     public function addTraitement(Request $request, ManagerRegistry $doctrine) : Response
     {
         $em = $doctrine->getManager();
@@ -52,7 +52,7 @@ class TraitementController extends AbstractController
         ));
     }
 
-    #[Route('/modif/{id}', name: 'modif_traitement')]
+    #[Route('/medecin/modif/{id}', name: 'modif_traitement')]
     public function modif_traitement(Request $request, ManagerRegistry $doctrine, $id): Response
     {
         $em = $doctrine->getManager();
@@ -70,7 +70,7 @@ class TraitementController extends AbstractController
     ));
   }
 
-  #[Route('supp/{id}', name: 'supp_traitement')]
+  #[Route('/medecin/supp/{id}', name: 'supp_traitement')]
   public function del(ManagerRegistry $doctrine, $id): Response
   {
     $repository = $doctrine->getRepository(Traitement::class);

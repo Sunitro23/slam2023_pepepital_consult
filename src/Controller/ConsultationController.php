@@ -33,7 +33,7 @@ class ConsultationController extends AbstractController
         ]);
     }
 
-    #[Route('/ajoutConsultation', name: 'ajoutConsultation')]
+    #[Route('/medecin/ajoutConsultation', name: 'ajoutConsultation')]
     public function ajoutConsultation(Request $request, EntityManagerInterface $entityManager): Response
     {
         $consultation = new Consultation();
@@ -53,7 +53,7 @@ class ConsultationController extends AbstractController
         ]);
     }
 
-    #[Route('/modifConsultation/{id}', name:'modifConsultation')]
+    #[Route('/medecin/modifConsultation/{id}', name:'modifConsultation')]
     public function modifConsultation(Request $request, ManagerRegistry $doctrine, $id): Response
     {
         $em=$doctrine->getManager();
@@ -70,7 +70,7 @@ class ConsultationController extends AbstractController
         ));
     }
 
-    #[Route('/supprimerConsultation/{id}', name: 'supprimerConsultation')]
+    #[Route('/medecin/supprimerConsultation/{id}', name: 'supprimerConsultation')]
     public function supprimerConsultation(Request $request, ManagerRegistry $doctrine, $id): Response
     {
         $em=$doctrine->getManager();

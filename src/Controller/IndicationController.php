@@ -33,7 +33,7 @@ class IndicationController extends AbstractController
         ]);
     }
 
-    #[Route('/ajoutIndication/{id}', name: 'ajoutIndication')]
+    #[Route('/medecin/ajoutIndication/{id}', name: 'ajoutIndication')]
     public function ajoutIndication(ManagerRegistry $doctrine, Request $request,$id): Response
     {
         $em = $doctrine->getManager();
@@ -50,7 +50,7 @@ class IndicationController extends AbstractController
         ]);
     }
 
-    #[Route('/supprimerIndication/{id}', name: 'supprimerIndication')]
+    #[Route('/medecin/supprimerIndication/{id}', name: 'supprimerIndication')]
     public function supprimerIndication(ManagerRegistry $doctrine, Request $request,$id): Response
     {
         $em = $doctrine->getManager();
@@ -70,7 +70,7 @@ class IndicationController extends AbstractController
         ]);
     }
 
-    #[Route('/modifierIndication/{id}', name: 'modifierIndication')]
+    #[Route('/medecin/modifierIndication/{id}', name: 'modifierIndication')]
     public function modifierIndication(ManagerRegistry $doctrine, Request $request,$id): Response
     {
         $em = $doctrine->getManager();
