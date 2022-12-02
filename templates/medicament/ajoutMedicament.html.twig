@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajout medicament{% endblock %}
+
+{% block body %}
+    <h3>Ajouter un médicament</h3>
+
+    {{ form_start(form) }}
+        {{ form_row(form.libelle) }}
+        {{ form_row(form.methodeApplication) }}
+        {{ form_row(form.submit) }}
+    {{ form_end(form) }}
+{% endblock %}

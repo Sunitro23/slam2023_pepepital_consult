@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modif Consultation{% endblock %}
+
+{% block body %}
+<div class="bg-light rounded text-dark d-flex flex-column justify-content-center m-5 p-2">
+
+    <h3>Modifier une consultation</h3>
+
+    {{ form_start(form) }}
+        {{ form_row(form.patient) }}
+        {{ form_row(form.medecin) }}
+        {{ form_row(form.submit) }}
+    {{ form_end(form) }}
+    </div>
+{% endblock %}

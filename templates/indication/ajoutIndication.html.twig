@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue !
+{% endblock %}
+
+{% block body %}
+	<div class="bg-light rounded text-dark d-flex flex-column justify-content-center m-5 p-2">
+		{{ form_start(form) }}
+		{{ form_widget(form) }}
+		{{ form_end(form) }}
+		<button type="button" id="boutonT"> Revenir aux indications </a></button>
+	</div>
+	<script type="text/javascript">
+    document.getElementById("boutonT").onclick = function () {
+        location.href="/indications";
+    };
+</script>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+{% block title %}Hello MedicamentController!
+{% endblock %}
+
+{% block body %}
+
+	<table class="table table-hover table-bordered">
+		<thead class="table-dark">
+            <tr><th colspan="2" scope="col" style="text-align:center">{{unPatient.nom}}</th></tr>
+			<tr>
+				<th scope="col">Médicaments Prescrits</th>
+                <th scope="col">Date</th>
+			</tr>
+		</thead>
+		<tbody>
+            {% for consultation in unPatient.consultations %}
+                {% for traitement in consultation.traitements %}
+                <tr>
+                <td>
+                    {% for indication in traitement.indications %}
+                        {{indication.medicaments.libelle}}<br>
+                    {% endfor %}
+                </td>
+                <td>{{ traitement.datedebut|date('Y-m-d') }}</td>
+                {% endfor %}
+                </tr>
+            {% endfor %}
+		</tbody>
+	{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Supprimer medicament{% endblock %}
+
+{% block body %}
+    <h3>Supprimer le médicament ?</h3>
+
+    {{ form_start(form) }}
+        {{ form_row(form.submit) }}
+    {{ form_end(form) }}
+{% endblock %}

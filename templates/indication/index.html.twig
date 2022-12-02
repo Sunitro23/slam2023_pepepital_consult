@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello IndicationController!
+{% endblock %}
+
+{% block body %}
+	<table class="table table-hover table-bordered">
+		<thead class="table-dark">
+			<tr>
+				<th scope="col">Posologie</th>
+				<th scope="col">Médicaments</th>
+				<th scope="col">Traitement</th>
+				<th scope="col">Patients</th>
+				<th scope="col">Modification / Suppression</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% if lesIndications is defined %}
+				{% for indication in lesIndications %}
+					<tr>
+						<td>{{indication.posologie()}}</td>
+						<td><a href= "/medicament/{{ indication.medicaments.id }}">{{indication.Medicaments.libelle()}}</a></td>
+						<td>Commence le : "{{indication.traitement.dateDebut()|date("m/d/Y")}}"
+							<br>
+							Pendant :
+							{{indication.traitement.duree()}}
+							jours</td>
+						<td>{{indication.traitement.consultation.patient.nom}}</td>
+						<td><a href= "/modifierIndication/{{ indication.id }}">Modifier</a> / <a href= "/supprimerIndication/{{ indication.id }}">Suppression</a></td>
+					</tr>
+				{% endfor %}
+			{% endif %}
+			{% if uneIndication is defined %}
+				<tr>
+					<td>{{uneIndication.posologie()}}</td>
+					<td>{{uneIndication.Medicaments.libelle()}}</td>
+					<td>Commence le : "{{uneIndication.traitement.dateDebut()|date("m/d/Y")}}"
+						<br>
+						Pendant :
+						{{uneIndication.traitement.duree()}}
+						jours</td>
+					<td>{{uneIndication.traitement.consultation.patient.nom}}</td>
+				</tr>
+			{% endif %}
+		</tbody>
+
+	</table>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MedicamentController!
+{% endblock %}
+
+{% block body %}
+
+	<table class="table table-hover table-bordered">
+		<thead class="table-dark">
+			<tr>
+				<th scope="col">Nom du médicament</th>
+				<th scope="col">Méthode d'application</th>
+				<th scope="col">Modifier/Supprimer</th>
+				{% if unMedicament is defined %}
+					<th scope="col">Patients</th>
+				{% endif %}
+			</tr>
+		</thead>
+		<tbody>
+			{% if lesMedicaments is defined %}
+				{% for medicament in lesMedicaments %}
+					<tr>
+						<td><a href="/medicament/{{medicament.id}}">{{medicament.libelle}}</a></td>
+						<td>{{medicament.methodeApplication.libelle}}</td>
+						<td><a href="/modifMedicament/{{medicament.id}}">Modifier</a> <a href="/supprimerMedicament/{{medicament.id}}">Supprimer</a></td>
+					</tr>
+				{% endfor %}
+			{% endif %}
+			{% if unMedicament is defined %}
+				<tr>
+					<td>{{unMedicament.libelle}}</td>
+					<td>{{unMedicament.methodeApplication.libelle}}</td>
+					<td><a href="/modifMedicament/{{unMedicament.id}}">Modifier</a> <a href="/supprimerMedicament/{{unMedicament.id}}">Supprimer</a></td>
+					<td>
+					{% for indication in unMedicament.indications %}
+						{{indication.traitement.consultation.patient.nom}}<br>
+					{% endfor %}
+					</td>
+				</tr>
+			{% endif %}
+		</tbody>
+	{% endblock %}

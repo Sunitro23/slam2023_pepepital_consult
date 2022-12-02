@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+{%block head %}
+{% endblock %}
+{% block body %}
+
+<div class="bg-light rounded text-dark d-flex flex-column justify-content-center m-5 p-2">
+
+<br>
+{{form_start(formTraitement)}}
+{{form_widget(formTraitement)}}
+{{form_end(formTraitement)}}
+</div>
+
+{% endblock %}

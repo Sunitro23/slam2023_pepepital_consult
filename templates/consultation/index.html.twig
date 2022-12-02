@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Consultations
+{% endblock %}
+
+{% block body %}
+<a href="ajoutConsultation/"><button>Ajouter Consultation</button><a>
+	<table class="table table-hover table-bordered">
+		<thead class="table-dark">
+			<tr>
+				<th scope="col" colspan="3" style="text-align:center">Consultations</th>
+				<th scope="col" colspan="3" style="text-align:center">Traitements</th>
+			</tr>
+			<tr>
+				<th scope="col">Nom du Patient</th>
+				<th scope="col">Nom du Docteur</th>
+				<th scope="col">Modifier/Supprimer</th>
+				<th scope="col">Durée du traitement</th>
+				<th scope="col">Début du traitement</th>
+				<th scope="col">Détail du traitement</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% if lesConsultations is defined %}
+				{% for consultation in lesConsultations %}
+					<tr>
+						<td>{{ consultation.patient.nom }}</td>
+						<td>{{ consultation.medecin.nom }}</td>
+						<td><a href="/modifConsultation/{{consultation.id}}">Modifier</a> <a href="/supprimerConsultation/{{consultation.id}}">Supprimer</a></td>
+
+						{% if consultation.traitements is defined %}
+							<td>
+								{% for traitement in consultation.traitements %}
+									{{ traitement.duree }} jour(s)<br>
+								{% endfor %}
+							</td>
+							<td>
+								{% for traitement in consultation.traitements %}
+									{{ traitement.dateDebut |date('d-m-Y') }}<br>
+								{% endfor %}
+							</td>
+							<td>
+								{% for traitement in consultation.traitements %}
+									<a href="/traitement/{{ traitement.id }}">Détails du traitement</a><br>
+								{% endfor %}
+							</td>
+						{% endif %}
+
+					</tr>
+				{% endfor %}
+
+			{% endif %}
+			{% if uneConsultation is defined %}
+				<tr>
+					<td>{{ uneConsultation.patient.nom }}</td>
+					<td>{{ uneConsultation.medecin.nom }}</td>
+
+					{% if uneConsultation.traitements is defined %}
+						<td>
+							{% for traitement in uneConsultation.traitements %}
+								{{ traitement.duree }}
+								jour(s)<br>
+							{% endfor %}
+						</td>
+						<td>
+							{% for traitement in uneConsultation.traitements %}
+								{{ traitement.dateDebut |date('d-m-Y') }}<br>
+							{% endfor %}
+						</td>
+						<td>
+							{% for traitement in uneConsultation.traitements %}
+								<a href="/traitement/{{ traitement.id }}">Détails du traitement</a><br>
+							{% endfor %}
+						</td>
+					{% endif %}
+				</tr>
+			{% endif %}
+		</tbody>
+	{% endblock %}
