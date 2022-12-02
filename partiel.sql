@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le : ven. 02 déc. 2022 à 09:03
+-- Généré le : ven. 02 déc. 2022 à 09:33
 -- Version du serveur : 10.5.16-MariaDB
 -- Version de PHP : 8.1.12
 
@@ -29,7 +29,6 @@ USE `partiel`;
 -- Structure de la table `consultation`
 --
 
-DROP TABLE IF EXISTS `consultation`;
 CREATE TABLE `consultation` (
   `id` int(11) NOT NULL,
   `patient_id` int(11) NOT NULL,
@@ -54,7 +53,6 @@ INSERT INTO `consultation` (`id`, `patient_id`, `medecin_id`) VALUES
 -- Structure de la table `doctrine_migration_versions`
 --
 
-DROP TABLE IF EXISTS `doctrine_migration_versions`;
 CREATE TABLE `doctrine_migration_versions` (
   `version` varchar(191) COLLATE utf8_unicode_ci NOT NULL,
   `executed_at` datetime DEFAULT NULL,
@@ -69,43 +67,9 @@ INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_
 ('DoctrineMigrations\\Version20221129141756', '2022-11-30 14:02:59', 521),
 ('DoctrineMigrations\\Version20221129143236', '2022-12-02 08:07:39', 21),
 ('DoctrineMigrations\\Version20221129144411', '2022-12-02 08:08:05', 21),
-('DoctrineMigrations\\Version20221202075308', '2022-12-02 08:08:36', 932);
-
--- --------------------------------------------------------
-
---
--- Structure de la table `effets_secondaire`
---
-
-DROP TABLE IF EXISTS `effets_secondaire`;
-CREATE TABLE `effets_secondaire` (
-  `id` int(11) NOT NULL,
-  `libelle` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Déchargement des données de la table `effets_secondaire`
---
-
-INSERT INTO `effets_secondaire` (`id`, `libelle`) VALUES
-(1, 'mal de tête'),
-(2, 'hallucination'),
-(3, 'perte de mémoire'),
-(4, 'perte de la fonction des membres'),
-(5, 'vomissements'),
-(6, 'descente d\'organe');
-
--- --------------------------------------------------------
-
---
--- Structure de la table `effets_secondaire_medicament`
---
-
-DROP TABLE IF EXISTS `effets_secondaire_medicament`;
-CREATE TABLE `effets_secondaire_medicament` (
-  `effets_secondaire_id` int(11) NOT NULL,
-  `medicament_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+('DoctrineMigrations\\Version20221202074736', '2022-12-02 09:26:17', 152),
+('DoctrineMigrations\\Version20221202075308', '2022-12-02 08:08:36', 932),
+('DoctrineMigrations\\Version20221202092649', '2022-12-02 09:26:52', 190);
 
 -- --------------------------------------------------------
 
@@ -113,7 +77,6 @@ CREATE TABLE `effets_secondaire_medicament` (
 -- Structure de la table `indication`
 --
 
-DROP TABLE IF EXISTS `indication`;
 CREATE TABLE `indication` (
   `id` int(11) NOT NULL,
   `medicaments_id` int(11) NOT NULL,
@@ -139,7 +102,6 @@ INSERT INTO `indication` (`id`, `medicaments_id`, `traitement_id`, `posologie`) 
 -- Structure de la table `medecin`
 --
 
-DROP TABLE IF EXISTS `medecin`;
 CREATE TABLE `medecin` (
   `id` int(11) NOT NULL,
   `nom` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL
@@ -161,7 +123,6 @@ INSERT INTO `medecin` (`id`, `nom`) VALUES
 -- Structure de la table `medicament`
 --
 
-DROP TABLE IF EXISTS `medicament`;
 CREATE TABLE `medicament` (
   `id` int(11) NOT NULL,
   `methode_application_id` int(11) NOT NULL,
@@ -194,7 +155,6 @@ INSERT INTO `medicament` (`id`, `methode_application_id`, `libelle`) VALUES
 -- Structure de la table `messenger_messages`
 --
 
-DROP TABLE IF EXISTS `messenger_messages`;
 CREATE TABLE `messenger_messages` (
   `id` bigint(20) NOT NULL,
   `body` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -211,7 +171,6 @@ CREATE TABLE `messenger_messages` (
 -- Structure de la table `methode_application`
 --
 
-DROP TABLE IF EXISTS `methode_application`;
 CREATE TABLE `methode_application` (
   `id` int(11) NOT NULL,
   `libelle` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL
@@ -234,7 +193,6 @@ INSERT INTO `methode_application` (`id`, `libelle`) VALUES
 -- Structure de la table `patient`
 --
 
-DROP TABLE IF EXISTS `patient`;
 CREATE TABLE `patient` (
   `id` int(11) NOT NULL,
   `nom` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL
@@ -256,7 +214,6 @@ INSERT INTO `patient` (`id`, `nom`) VALUES
 -- Structure de la table `traitement`
 --
 
-DROP TABLE IF EXISTS `traitement`;
 CREATE TABLE `traitement` (
   `id` int(11) NOT NULL,
   `consultation_id` int(11) NOT NULL,
@@ -278,6 +235,29 @@ INSERT INTO `traitement` (`id`, `consultation_id`, `duree`, `date_debut`) VALUES
 (8, 1, 6, '2023-05-07'),
 (9, 4, 7, '2023-01-02');
 
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `user`
+--
+
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL,
+  `username` varchar(180) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `roles` longtext COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '(DC2Type:json)',
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `user`
+--
+
+INSERT INTO `user` (`id`, `username`, `roles`, `password`) VALUES
+(1, 'medecin', '[\"ROLE_MEDECIN\"]', '$2y$13$ji4F04yC3iAQ3uFGrizt9.hpkBw3dQnYlWL1NBRxcCGfYbOrB9IM.'),
+(2, 'pharmacien', '[\"ROLE_PHARMACIEN\"]', '$2y$13$utP638RsUuSgtylJrS5U1uI.HdTvg99s1v0KjFou3sz8HOBB8D31i'),
+(3, 'bernard-medecin', '[\"ROLE_MEDECIN\"]', '$2y$13$SP8y2SwKg/Ld9nCJ3yuRXe6TeYVeHxpPhjrG2Ds7Z0h4lQZLmYMd.'),
+(4, 'gerard-pharmacien', '[\"ROLE_PHARMACIEN\"]', '$2y$13$N/5YDLTJIXQVqjZ1/juXqeUs.pbr8I0nfV5kTro8RF0ny90eoTzXW');
+
 --
 -- Index pour les tables déchargées
 --
@@ -295,20 +275,6 @@ ALTER TABLE `consultation`
 --
 ALTER TABLE `doctrine_migration_versions`
   ADD PRIMARY KEY (`version`);
-
---
--- Index pour la table `effets_secondaire`
---
-ALTER TABLE `effets_secondaire`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `effets_secondaire_medicament`
---
-ALTER TABLE `effets_secondaire_medicament`
-  ADD PRIMARY KEY (`effets_secondaire_id`,`medicament_id`),
-  ADD KEY `IDX_2E1CC85374DB3449` (`effets_secondaire_id`),
-  ADD KEY `IDX_2E1CC853AB0D61F7` (`medicament_id`);
 
 --
 -- Index pour la table `indication`
@@ -360,6 +326,13 @@ ALTER TABLE `traitement`
   ADD KEY `IDX_2A356D2762FF6CDF` (`consultation_id`);
 
 --
+-- Index pour la table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `UNIQ_8D93D649F85E0677` (`username`);
+
+--
 -- AUTO_INCREMENT pour les tables déchargées
 --
 
@@ -367,12 +340,6 @@ ALTER TABLE `traitement`
 -- AUTO_INCREMENT pour la table `consultation`
 --
 ALTER TABLE `consultation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT pour la table `effets_secondaire`
---
-ALTER TABLE `effets_secondaire`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
@@ -418,6 +385,12 @@ ALTER TABLE `traitement`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
+-- AUTO_INCREMENT pour la table `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- Contraintes pour les tables déchargées
 --
 
@@ -427,13 +400,6 @@ ALTER TABLE `traitement`
 ALTER TABLE `consultation`
   ADD CONSTRAINT `FK_964685A64F31A84` FOREIGN KEY (`medecin_id`) REFERENCES `medecin` (`id`),
   ADD CONSTRAINT `FK_964685A66B899279` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`id`);
-
---
--- Contraintes pour la table `effets_secondaire_medicament`
---
-ALTER TABLE `effets_secondaire_medicament`
-  ADD CONSTRAINT `FK_2E1CC85374DB3449` FOREIGN KEY (`effets_secondaire_id`) REFERENCES `effets_secondaire` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `FK_2E1CC853AB0D61F7` FOREIGN KEY (`medicament_id`) REFERENCES `medicament` (`id`) ON DELETE CASCADE;
 
 --
 -- Contraintes pour la table `indication`
