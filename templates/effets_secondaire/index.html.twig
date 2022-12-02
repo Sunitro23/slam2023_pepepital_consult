@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}EffetsSecondaire index{% endblock %}
+
+{% block body %}
+    <h1>EffetsSecondaire index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Libelle</th>                
+                <th>actions</th>                
+            </tr>
+        </thead>
+        <tbody>
+        {% for effets_secondaire in effets_secondaires %}
+            <tr>
+                <td>{{ effets_secondaire.id }}</td>
+                <td>{{ effets_secondaire.libelle }}</td>
+                
+                <td>
+                    <a href="{{ path('app_effets_secondaire_show', {'id': effets_secondaire.id}) }}"><button type="button"> sélectionner </button></a>
+                    <a href="{{ path('app_effets_secondaire_edit', {'id': effets_secondaire.id}) }}"><button type="button"> Modifier</button></a>                    
+                </td>
+                
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_effets_secondaire_new') }}">Create new</a>
+{% endblock %}

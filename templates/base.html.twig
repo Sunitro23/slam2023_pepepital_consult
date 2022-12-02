@@ -34,6 +34,9 @@
 							<a class="nav-link" href="{{ path('medicaments') }}">Médicaments</a>
 						</li>
 						<li class="nav-item">
+							<a class="nav-link" href="{{ path('app_effets_secondaire_index') }}"> Effets Secondaire </a>
+						</li>						
+						<li class="nav-item">
 						{% if app.user is null %}
 							<a href="{{ path('app_login') }}"><button>Connexion</button></a>
 						{% else %}
