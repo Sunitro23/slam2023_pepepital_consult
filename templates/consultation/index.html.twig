@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block body %}
-<a href="ajoutConsultation/"><button>Ajouter Consultation</button><a>
+<a href="/medecin/ajoutConsultation/"><button>Ajouter Consultation</button><a>
 	<table class="table table-hover table-bordered">
 		<thead class="table-dark">
 			<tr>
@@ -26,7 +26,7 @@
 					<tr>
 						<td>{{ consultation.patient.nom }}</td>
 						<td>{{ consultation.medecin.nom }}</td>
-						<td><a href="/modifConsultation/{{consultation.id}}">Modifier</a> <a href="/supprimerConsultation/{{consultation.id}}">Supprimer</a></td>
+						<td><a href="/medecin/modifConsultation/{{consultation.id}}">Modifier</a> <a href="/supprimerConsultation/{{consultation.id}}">Supprimer</a></td>
 
 						{% if consultation.traitements is defined %}
 							<td>

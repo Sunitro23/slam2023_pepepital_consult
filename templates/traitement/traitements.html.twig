@@ -30,8 +30,8 @@
 						<td>{{traitement.DateDebut|date('Y-m-d')}}</td>
 						<td>{{traitement.Consultation.id}}</td>
 						<td>{{traitement.Consultation.Medecin.nom}}</td>
-						<td> <a href='{{path('modifTraitement', {id:traitement.id})}}'><button type="button">Modifier</button></a></td>
-						<td> <a href='{{path('supprimerTraitement', {id:traitement.id})}}'><button type="button" onclick="return confirm('êtes vous sûr ?')">Supprimer</button></a></td>
+						<td> <a href='{{path('modif_traitement', {id:traitement.id})}}'><button type="button">Modifier</button></a></td>
+						<td> <a href='{{path('supp_traitement', {id:traitement.id})}}'><button type="button" onclick="return confirm('êtes vous sûr ?')">Supprimer</button></a></td>
 					</tr>
 				{% endfor %}
 			{% endif %}

@@ -70,13 +70,8 @@ class IndicationController extends AbstractController
         ]);
     }
 
-<<<<<<< HEAD
-    #[Route('/modifIndication/{id}', name: 'modifIndication')]
-    public function modifIndication(ManagerRegistry $doctrine, Request $request,$id): Response
-=======
     #[Route('/medecin/modifierIndication/{id}', name: 'modifierIndication')]
     public function modifierIndication(ManagerRegistry $doctrine, Request $request,$id): Response
->>>>>>> 79ead00371317df82cf464cd01d238b3f6a4d2b5
     {
         $em = $doctrine->getManager();
         $vm = $doctrine->getRepository(Indication::class);
